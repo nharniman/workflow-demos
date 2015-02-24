@@ -30,6 +30,7 @@ node('linux') {
     step $class: 'hudson.tasks.junit.JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml'
     echo "INFO - Ending build phase"
 }
+checkpoint 'Build complete'
 
 stage name: 'Quality analysis and Perfs', concurrency: 1
 parallel(qualityAnalysis: {
@@ -41,6 +42,7 @@ parallel(qualityAnalysis: {
         ensureMaven()
         sh 'tar -x -f src.tar'
         sh 'mvn -o sonar:sonar'
+
         echo "INFO - Ending SONAR"
     }
 }, performanceTest: {
@@ -71,7 +73,6 @@ node('linux') {
     echo "INFO - Starting QA Deploy"
     sh 'rm -rf *'
     unarchive mapping: ['target/petclinic.war': 'petclinic.war']
-
     deployApp 'petclinic.war', qaCatalinaBase, qaHttpPort
     echo "INFO - Ending QA Deploy"
 }
@@ -127,8 +128,10 @@ def deployApp(war, catalinaBase, httpPort) {
         cp -rf ${war} ${catalinaBase}/webapps/ROOT.war
         ${catalinaHome}/bin/startup.sh
     """
-    echo "INFO - $catalinaBase server restarted with new webapp $war, see http://localhost:$httpPort"
-    retry(count: 5) { sh "sleep 5 && curl http://localhost:$httpPort/health-check.jsp" }
+    echo "INFO - $catalinaBase server restarted with new webapp $war, \
+        see http://localhost:$httpPort"
+    retry(count: 5) { sh "sleep 5 && \
+        curl http://localhost:$httpPort/health-check.jsp" }
 }
 
 /**
