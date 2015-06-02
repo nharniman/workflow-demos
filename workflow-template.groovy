@@ -72,6 +72,14 @@ parallel(qualityAnalysis: {
 }
 )
 
+//if ( deploy ) {
+//    stage name: 'Deploy Artifact'
+//    echo "Deploying artifact $warname to repository"
+//
+//} else {
+//    echo "Not deploying to repository"
+//}
+
 stage name: 'QA', concurrency: 1
 checkpoint 'ENTER QA'
 
