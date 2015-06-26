@@ -16,6 +16,7 @@ node ('shared') {
      * RunWrapper exposes various whitelisted attributes of a Run
      * If more details are required the Run object can be retrieved via getRawBuild()
      * See http://javadoc.jenkins-ci.org/index.html?hudson/model/Run.html
+     * This will require Script Approval to be given
      */
     echo "Dumping properties for $job"
 
