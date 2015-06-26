@@ -15,7 +15,7 @@ node ('shared') {
     /* The return from `build` is a handle to org.jenkinsci.plugins.workflow.support.steps.build.RunWrapper
      * RunWrapper exposes various whitelisted attributes of a Run
      * If more details are required the Run object can be retrieved via getRawBuild()
-     *  
+     * See http://javadoc.jenkins-ci.org/index.html?hudson/model/Run.html
      */
     echo "Dumping properties for $job"
 
