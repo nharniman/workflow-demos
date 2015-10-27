@@ -1,4 +1,4 @@
-def INST=false
+boolean INST=false
 
 node ("linux") {
     parallel comp1: {
@@ -6,43 +6,40 @@ node ("linux") {
 
         sh "echo 'Doing COMP1 PRE' "
 
-        retry(1440) {
-
-            sleep time: 1, unit: 'MINUTES'
-            INST==true
+        retry(count: 1440) {
+           sh "sleep 60 && $INST"
         }
 
         sh "echo 'Doing COMP1 INST' "
+
     }, comp2: {
 
         sh "echo 'Doing COMP2 PRE' "
-        retry(1440) {
-
-            sleep time: 1, unit: 'MINUTES'
-            INST==true
+        retry(count: 1440) {
+           sh "sleep 60 && $INST"
         }
 
         sh "echo 'Doing COMP2 INST' "
+
     }, comp3: {
 
         sh "echo 'Doing COMP3 PRE' "
-        retry(1440) {
-
-            sleep time: 1, unit: 'MINUTES'
-            INST==true
+        retry(count: 1440) {
+           sh "sleep 60 && $INST"
         }
 
         sh "echo 'Doing COMP3 INST' "
+
     }, comp4: {
 
         sh "echo 'Doing COMP4 PRE' "
 
-        retry(1440) {
-
-            sleep time: 1, unit: 'MINUTES'
-            INST==true
+        retry(count: 1440) {
+           sh "sleep 60 && $INST"
         }
+
         sh "echo 'Doing COMP4 INST' "
+
     }, approval: {
 
         input 'Proceed with INST?'
