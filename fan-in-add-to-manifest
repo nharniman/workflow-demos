@@ -1,7 +1,7 @@
 // Application being triggered is supplied in the variable: app
 // Revision is supplied in the variable: revision
 
-def downstreamJob="multi-app-workflow-from-manifest"
+def downstreamJob="fan-in-deploy-and-test"
 
 if (revision=="") {
     error 'No revision specified'
