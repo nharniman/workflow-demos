@@ -6,7 +6,7 @@
 // Note multiple triggers with the same parameters are coalesced
 
 sleepDuration=15
-manifestLocation="add-build-to-merged-manifest"
+manifestLocation="fan-in-add-to-manifest"
 
 node ("linux") {
 
